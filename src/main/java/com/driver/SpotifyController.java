@@ -14,13 +14,14 @@ public class SpotifyController {
     @PostMapping("/add-user")
     public String createUser(@RequestParam(name = "name") String name, String mobile){
         //create the user with given name and number
+        spotifyService.createUser(name,mobile);
         return "Success";
     }
 
     @PostMapping("/add-artist")
     public String createArtist(@RequestParam(name = "name") String name){
         //create the artist with given name
-
+        spotifyService.createArtist(name);
         return "Success";
     }
 
@@ -28,15 +29,16 @@ public class SpotifyController {
     public String createAlbum(@RequestParam(name = "title") String title, String artistName){
         //If the artist does not exist, first create an artist with given name
         //Create an album with given title and artist
-
+        spotifyService.createAlbum(title,artistName);
         return "Success";
     }
 
     @PostMapping("/add-song")
     public String createSong(String title, String albumName, int length) throws Exception{
-        //If the album does not exist in database, throw "Album does not exist" exception
+        //If the album does not exist in database, throw
+        //exception
         //Create and add the song to respective album
-
+       spotifyService.createSong(title,albumName,length);
         return "Success";
     }
 
@@ -45,7 +47,7 @@ public class SpotifyController {
         //Create a playlist with given title and add all songs having the given length in the database to that playlist
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
-
+        spotifyService.createPlaylistOnLength(mobile,title,length);
         return "Success";
     }
 
@@ -84,12 +86,12 @@ public class SpotifyController {
     @GetMapping("/popular-artist")
     public String mostPopularArtist(){
         //Return the artist name with maximum likes
-
+        return "";
     }
 
     @GetMapping("/popular-song")
     public String mostPopularSong(){
         //return the song title with maximum likes
-
+          return "";
     }
 }
