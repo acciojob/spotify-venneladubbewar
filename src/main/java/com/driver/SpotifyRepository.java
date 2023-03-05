@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SpotifyRepository {
-    public HashMap<Artist, List<Album>> artistAlbumMap;
-    public HashMap<Album, List<Song>> albumSongMap;
+    public HashMap<Artist, List<Album>> artistAlbumMap;  //
+    public HashMap<Album, List<Song>> albumSongMap;    //
     public HashMap<Playlist, List<Song>> playlistSongMap;
     public HashMap<Playlist, List<User>> playlistListenerMap;
     public HashMap<User, Playlist> creatorPlaylistMap;
@@ -30,11 +30,11 @@ public class SpotifyRepository {
         userPlaylistMap = new HashMap<>();
         songLikeMap = new HashMap<>();
 
-        users = new ArrayList<>();
+        users = new ArrayList<>();   //
         songs = new ArrayList<>();
         playlists = new ArrayList<>();
         albums = new ArrayList<>();
-        artists = new ArrayList<>();
+        artists = new ArrayList<>();    //
     }
 
     public User createUser(String name, String mobile) {
@@ -46,39 +46,55 @@ public class SpotifyRepository {
     public Artist createArtist(String name) {
         Artist a = new Artist(name);
         artists.add(a);
-        artistAlbumMap.put(a,albums);
+        artistAlbumMap.put(a,new ArrayList<Album>());
         return a;
     }
 
     public Album createAlbum(String title, String artistName) {
+        Album aa = new Album(title);
+        albums.add(aa);
+        List<Album> al = new ArrayList<>();
+        al.add(aa);
 
         if(!artists.contains(artistName)) {
-            Artist ar = new Artist(artistName);
-            artists.add(ar);
-        }
+            Artist a= new Artist(artistName);
+            artists.add(a);
+            artistAlbumMap.put(a,al);
+        } else artistAlbumMap.get(artistName).add(aa);
+        albums.add(aa);
+       return aa;
 
-        Album a = new Album(title);
-        albums.add(a);
-        albumSongMap.put(a,songs);
-        return a;
+
+
+//        albumSongMap.put(a,new ArrayList<Song>());
+//        return a;
 
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception{
-        if(!albums.contains(albumName)) {
-            throw new Exception("Album does not exist");
-        }
-
-        Song s = new Song(title,length);
-        songs.add(s);
-      //  playlists.add();
-     //   playlistSongMap.put(title,playlists);
-         return s;
+        Song song= null;
+         try {
+             if(albums.contains(albumName)) {
+                  song = new Song(title, length);
+                 songs.add(song);
+             }
+         }
+         catch (Exception e) {
+             System.out.println("Album does not exist");
+         }
+         return song;
     }
 
     public Playlist createPlaylistOnLength(String mobile, String title, int length) throws Exception {
        // if(users.contains(mobile)) {
             Playlist p = new Playlist(title);
+            List<Song> s = new ArrayList<>();
+              for(int i=0; i<songs.size(); i++) {
+                if(songs.get(i).getLength()== length) {
+               //     Song s = new Song(i);
+               //       playlistSongMap.put(p,);
+                }
+            }
 //            Song s = new Song(title, length);
 //            songs.add(s);
 //            Album a = new Album(title);
@@ -95,24 +111,38 @@ public class SpotifyRepository {
 
     public Playlist createPlaylistOnName(String mobile, String title, List<String> songTitles) throws Exception {
         Playlist p = new Playlist(title);
+        playlists.add(p);
+      //  playlistSongMap.put(p,);
         return p;
     }
 
     public Playlist findPlaylist(String mobile, String playlistTitle) throws Exception {
       //  Playlist p = new Playlist(title);
-     //   return p;
+        return findPlaylist(mobile,playlistTitle);
     }
 
     public Song likeSong(String mobile, String songTitle) throws Exception {
-    //    Playlist p = new Playlist(title);
+     //    Playlist p = new Playlist(title);
     //    return p;
+       return likeSong(mobile,songTitle);
     }
 
     public String mostPopularArtist() {
+        int ans = 0;
+      //  for(int x : artistAlbumMap) {
+       //    ans = Math.max(ans,Playlist.getLikes());
+     //   }
         return "";
     }
 
     public String mostPopularSong() {
+        int max =0;
+       // for(int i=0; i<songLikeMap.size(); i++)  {
+   //     for(String i = songLikeMap) {
+   //        max= Math.max(songLikeMap.get(i),max);
+   //        return  songLikeMap.get(max);
+   //     }
+
         return "";
     }
 }
