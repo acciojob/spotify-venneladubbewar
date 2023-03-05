@@ -563,21 +563,44 @@ public class SpotifyRepository {
 
 
     public String mostPopularArtist() {
-        int ans = 0;
+     //   int ans = 0;
         //  for(int x : artistAlbumMap) {
         //    ans = Math.max(ans,Playlist.getLikes());
         //   }
-        return "";
+     //   return "";
+
+        String name="";
+        int maxLikes = Integer.MIN_VALUE;
+        for(Artist art : artists){
+            maxLikes= Math.max(maxLikes,art.getLikes());
+        }
+        for(Artist art : artists){
+            if(maxLikes==art.getLikes()){
+                name=art.getName();
+            }
+        }
+        return name;
     }
 
     public String mostPopularSong() {
-        int max =0;
+      //  int max =0;
         // for(int i=0; i<songLikeMap.size(); i++)  {
         //     for(String i = songLikeMap) {
         //        max= Math.max(songLikeMap.get(i),max);
         //        return  songLikeMap.get(max);
         //     }
 
-        return "";
+     //   return "";
+
+        String name="";
+        int maxLikes = Integer.MIN_VALUE;
+        for(Song song : songs){
+            maxLikes=Math.max(maxLikes,song.getLikes());
+        }
+        for(Song song : songs){
+            if(maxLikes==song.getLikes())
+                name=song.getTitle();
+        }
+        return name;
     }
 }
