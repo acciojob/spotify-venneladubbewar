@@ -97,21 +97,30 @@ public class SpotifyRepository {
        // if(users.contains(mobile)) {
             Playlist p = new Playlist(title);
             List<Song> s = new ArrayList<>();
+            List<User> li = new ArrayList<>();
               for(int i=0; i<songs.size(); i++) {
                 if(songs.get(i).getLength()== length) {
-               //     Song s = new Song(i);
-               //       playlistSongMap.put(p,);
+              s.add(songs.get(i));
                 }
             }
-//            Song s = new Song(title, length);
-//            songs.add(s);
-//            Album a = new Album(title);
-//            albumSongMap.put(a,songs);
-//            playlists.add(p);
-//            playlistSongMap.put(p,songs);
-//     //   }
-//        else {
-//            throw new Exception("User does not exist");
+
+              playlistSongMap.put(p,s);
+              int f =0;
+        for(int i=0; i<users.size(); i++) {
+            if(users.get(i).getMobile()== mobile) {
+                f++;
+
+                li.add(users.get(i));
+                break;
+            }
+            }
+
+        if(f==0)
+            throw new Exception("User does not exist");
+        else {
+            playlistListenerMap.put(p,li);
+          //  return p;
+        }
 //        }
         return p;
 
