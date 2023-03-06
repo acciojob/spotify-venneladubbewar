@@ -416,11 +416,6 @@ public class SpotifyRepository {
         albums.add(aa);
         return aa;
 
-
-
-//        albumSongMap.put(a,new ArrayList<Song>());
-//        return a;
-
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception {
@@ -479,10 +474,6 @@ public class SpotifyRepository {
     }
 
     public Playlist createPlaylistOnName(String mobile, String title, List<String> songTitles) throws Exception {
-    //    Playlist p = new Playlist(title);
-    //    playlists.add(p);
-        //  playlistSongMap.put(p,);
-    //    return p;
 
         for(Playlist playlist : playlists){
             if(playlist.getTitle().equals(title))
@@ -535,9 +526,6 @@ public class SpotifyRepository {
     }
 
     public Playlist findPlaylist(String mobile, String playlistTitle) throws Exception {
-        //  Playlist p = new Playlist(title);
-      //  return findPlaylist(mobile,playlistTitle);
-
 
         boolean flag =false;
         Playlist playlist = new Playlist();
@@ -590,9 +578,7 @@ public class SpotifyRepository {
     }
 
     public Song likeSong(String mobile, String songTitle) throws Exception {
-        //    Playlist p = new Playlist(title);
-        //    return p;
-      //  return likeSong(mobile,songTitle);
+
 
         User curUser= new User(songTitle,mobile);
         boolean flag2= false;
@@ -662,11 +648,7 @@ public class SpotifyRepository {
 
 
     public String mostPopularArtist() {
-     //   int ans = 0;
-        //  for(int x : artistAlbumMap) {
-        //    ans = Math.max(ans,Playlist.getLikes());
-        //   }
-     //   return "";
+
 
         String name="";
         int maxLikes = Integer.MIN_VALUE;
@@ -682,14 +664,6 @@ public class SpotifyRepository {
     }
 
     public String mostPopularSong() {
-      //  int max =0;
-        // for(int i=0; i<songLikeMap.size(); i++)  {
-        //     for(String i = songLikeMap) {
-        //        max= Math.max(songLikeMap.get(i),max);
-        //        return  songLikeMap.get(max);
-        //     }
-
-     //   return "";
 
         String name="";
         int maxLikes = Integer.MIN_VALUE;
